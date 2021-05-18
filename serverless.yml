@@ -1,0 +1,23 @@
+service: linkedin-professional
+frameworkVersion: '2'
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+provider:
+  name: aws
+  runtime: python3.8
+  lambdaHashingVersion: 20201221
+  region: us-east-1
+
+functions:
+  skills:
+    handler: handler.skills
+    events:
+      - http:
+          path: skills
+          method: get
+
+plugins:
+  - serverless-python-requirements

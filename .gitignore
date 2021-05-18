@@ -1,0 +1,9 @@
+# Node
+node_modules/
+
+# Python
+.venv/
+__pycache__/
+
+# Misc
+.serverless/
