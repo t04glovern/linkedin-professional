@@ -10,7 +10,7 @@ serverless create --template aws-python3
 serverless config credentials --provider aws --key <ACCESS KEY ID> --secret <SECRET KEY>
 ```
 
-## Python & Domain Requirements
+### Python & Domain Requirements
 
 ```bash
 serverless plugin install -n serverless-python-requirements
@@ -27,6 +27,16 @@ custom:
     dockerizePip: true
 ```
 
+## LinkedIn Auth Flow
+
+Create a set of secret values using the client ID and client secret from the LinkedIn developer console
+
+```bash
+aws ssm put-parameter --overwrite --name devopstar-linkedin-client-id       --type String --value $CLIENT_ID
+aws ssm put-parameter --overwrite --name devopstar-linkedin-client-secret   --type String --value $CLIENT_SECRET
+aws ssm put-parameter --overwrite --name devopstar-linkedin-auth-code       --type String --value $AUTH_CODE
+```
+
 ## Deploy
 
 ```bash
@@ -34,7 +44,7 @@ npm install
 serverless deploy
 ```
 
-## Invoke Function
+### Invoke Function
 
 You can invoke your deployed functions using the following
 
