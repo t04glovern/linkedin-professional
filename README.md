@@ -1,6 +1,6 @@
 # LinkedIn Professional
 
-LinkedIn Professional is a POC program that helps you boost your career by automatically updating your linkedin profile with the hottest new skills in tech based on the [Technology Radar](https://www.thoughtworks.com/radar)
+LinkedIn Professional is a POC program that helps you boost your career by automatically updating your LinkedIn profile with the hottest new skills in tech based on the [Technology Radar](https://www.thoughtworks.com/radar)
 
 ## Setup Serverless
 
