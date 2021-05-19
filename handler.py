@@ -1,5 +1,6 @@
 
 from bs4 import BeautifulSoup
+import os
 import requests
 import json
 import random
@@ -20,14 +21,25 @@ def skills(event, context):
             target_radar = target_radar_soup.find(id='responsive-tech-radar')
             skill_items[quadrant] = skills_from_html(target_radar)
     
+    phrase = get_phrase(skill_items)
     body = {
-        'phrase': get_phrase(skill_items)
+        'phrase': phrase,
+        'jargon': generate_jargon(phrase)
     }
 
     return {
         "statusCode": 200,
         "body": json.dumps(body)
     }
+
+def generate_jargon(phrase):
+    return requests.post(
+        "https://api.deepai.org/api/text-generator",
+        data={
+            'text': phrase,
+        },
+        headers={'api-key': os.environ['DEEP_AI_TOKEN']}
+    ).json()
 
 def get_phrase(skill_items):
     return 'I think that ' + random_skill(skill_items) + ' are ' + random_adjective() + ' and ' + random_skill(skill_items) + ' should strive to be more ' + random_adjective() + ' because'
@@ -44,9 +56,12 @@ def skills_from_html(html_target_radar):
 def random_skill(skill_items):
     quadrants = ['techniques', 'tools', 'platforms', 'languages-and-frameworks']
     options = ['adopt', 'trial', 'assess', 'hold']
-    quadrant = random.choice(quadrants)
-    option = random.choice(options)
     choice = None
     while choice is None:
-        choice = random.choice(skill_items[quadrant][option])
+        quadrant = random.choice(quadrants)
+        option = random.choice(options)
+        try:
+            choice = random.choice(skill_items[quadrant][option])
+        except:
+            print('hello i am a mediocre dev')
     return choice

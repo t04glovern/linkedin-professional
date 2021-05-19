@@ -35,6 +35,7 @@ Create a set of secret values using the client ID and client secret from the Lin
 aws ssm put-parameter --overwrite --name devopstar-linkedin-client-id       --type String --value $CLIENT_ID
 aws ssm put-parameter --overwrite --name devopstar-linkedin-client-secret   --type String --value $CLIENT_SECRET
 aws ssm put-parameter --overwrite --name devopstar-linkedin-auth-code       --type String --value $AUTH_CODE
+aws ssm put-parameter --overwrite --name devopstar-deep-ai-token            --type String --value $DEEP_AI_TOKEN
 ```
 
 ## Deploy
