@@ -39,7 +39,7 @@ def generate_jargon(phrase):
             'text': phrase,
         },
         headers={'api-key': os.environ['DEEP_AI_TOKEN']}
-    ).json()
+    ).json()['output']
 
 def get_phrase(skill_items):
     return 'I think that ' + random_skill(skill_items) + ' are ' + random_adjective() + ' and ' + random_skill(skill_items) + ' should strive to be more ' + random_adjective() + ' because'
