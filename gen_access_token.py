@@ -72,10 +72,10 @@ def get_linkedin_profile_id():
 
 if __name__ == "__main__":
     # Run me first
-    # create_user_code()
+    create_user_code()
 
     # Run me second
-    # get_access_token()
+    #get_access_token()
 
     # Run me to test
-    get_linkedin_profile_id()
+    #get_linkedin_profile_id()
