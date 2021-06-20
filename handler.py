@@ -1,5 +1,4 @@
 
-import boto3
 from bs4 import BeautifulSoup
 import os
 import requests
@@ -12,8 +11,6 @@ from adjectives import random_adjective
 radar_base_url = 'https://www.thoughtworks.com/radar/'
 quadrants = ['techniques', 'tools', 'platforms', 'languages-and-frameworks']
 skill_items = {}
-
-client = boto3.client('ssm')
 
 
 def skills(event, context):
@@ -34,7 +31,7 @@ def skills(event, context):
     }
 
     # Post to LinkedIn
-    #share_to_linkedin(body['jargon'])
+    # share_to_linkedin(body['jargon'])
 
     return {
         "statusCode": 200,
@@ -82,10 +79,8 @@ def random_skill(skill_items):
 
 
 def share_to_linkedin(post_text):
-    ACCESS_TOKEN = client.get_parameter(
-        Name='devopstar-linkedin-access-token')['Parameter']['Value']
-    PROFILE_ID = client.get_parameter(
-        Name='devopstar-linkedin-profile-id')['Parameter']['Value']
+    ACCESS_TOKEN = os.environ['LINKEDIN_ACCESS_TOKEN']
+    PROFILE_ID = os.environ['LINKEDIN_PROFILE_ID']
     try:
         headers = {
             'X-Restli-Protocol-Version': '2.0.0',
@@ -93,15 +88,17 @@ def share_to_linkedin(post_text):
             'Authorization': 'Bearer {}'.format(ACCESS_TOKEN)
         }
         data = {"author": "urn:li:person:{}".format(PROFILE_ID),
-            "lifecycleState": "PUBLISHED",
-            "specificContent": {
+                "lifecycleState": "PUBLISHED",
+                "specificContent": {
                 "com.linkedin.ugc.ShareContent": {
                     "shareCommentary": {"text": "{}".format(post_text)},
                     "shareMediaCategory": "NONE"}},
-            "visibility": {
+                "visibility": {
                 "com.linkedin.ugc.MemberNetworkVisibility": "CONNECTIONS"
-            }
         }
-        requests.post('https://api.linkedin.com/v2/ugcPosts', headers=headers, json=data)
+        }
+        requests.post('https://api.linkedin.com/v2/ugcPosts',
+                      headers=headers, json=data)
     except:
-        print('[POST] Linkedin failed to post: {}'.format(traceback.format_exc()))
+        print('[POST] Linkedin failed to post: {}'.format(
+            traceback.format_exc()))

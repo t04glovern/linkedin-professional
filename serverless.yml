@@ -11,8 +11,6 @@ provider:
   lambdaHashingVersion: 20201221
   region: us-east-1
   environment:
-    LINKEDIN_CLIENT_ID: ${ssm:devopstar-linkedin-client-id}
-    LINKEDIN_CLIENT_SECRET: ${ssm:devopstar-linkedin-client-secret}
     LINKEDIN_ACCESS_TOKEN: ${ssm:devopstar-linkedin-access-token}
     LINKEDIN_PROFILE_ID: ${ssm:devopstar-linkedin-profile-id}
     DEEP_AI_TOKEN: ${ssm:devopstar-deep-ai-token}
