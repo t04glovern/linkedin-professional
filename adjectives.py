@@ -1350,5 +1350,6 @@ adjectives = [
     'zigzag'
 ]
 
+
 def random_adjective():
     return random.choice(adjectives)
