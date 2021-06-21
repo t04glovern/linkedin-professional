@@ -14,6 +14,7 @@ provider:
     LINKEDIN_ACCESS_TOKEN: ${ssm:devopstar-linkedin-access-token}
     LINKEDIN_PROFILE_ID: ${ssm:devopstar-linkedin-profile-id}
     DEEP_AI_TOKEN: ${ssm:devopstar-deep-ai-token}
+    ENABLE_LINKEDIN_POSTS: "False"
 
 functions:
   skills:
@@ -22,6 +23,10 @@ functions:
       - http:
           path: skills
           method: get
+  share:
+    handler: handler.share
+    events:
+      - schedule: rate(24 hours)
 
 plugins:
   - serverless-python-requirements

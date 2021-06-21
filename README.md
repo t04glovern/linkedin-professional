@@ -58,7 +58,9 @@ pip install -r requirements.txt
 
 # Test locally
 serverless invoke local -f skills
+serverless invoke local -f share
 
 # Test Deployed version
 serverless invoke -f skills
+serverless invoke -f share
 ```
